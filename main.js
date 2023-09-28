@@ -31,6 +31,33 @@ getAllBtn.addEventListener('click', () => {
 })
 
 
+for (let i = 0; i < charBtns.length ; i++) {
+  charBtns[i].addEventListener('click', (event) => {
+
+    let name = event.target.id
+
+    axios.get(`${baseURL}/character/${name}`)
+
+    .then((response) => {
+      clearCharacters()
+      
+      createCharacterCard(response.data);
+      
+  
+    })
+    .catch(() => {
+  
+    })
+  })
+
+}
+
+
+
+
+
+
+
 
 ageForm.addEventListener('submit', (event) => {
   event.preventDefault()
@@ -56,7 +83,6 @@ createForm.addEventListener('submit', (event) => {
   event.preventDefault();
 
   let maBod = {
-    id: 0,
     firstName: newFirstInput.value, 
     lastName: newLastInput.value, 
     gender: newGenderDropDown.value,
@@ -70,7 +96,7 @@ createForm.addEventListener('submit', (event) => {
     for (let i = 0; i < response.data.length; i++) {
       createCharacterCard(response.data[i]);
     }
-    
+
   })
   .catch ((error) => {
 
@@ -78,6 +104,15 @@ createForm.addEventListener('submit', (event) => {
 
 
 })
+
+
+
+
+
+
+
+
+
 
 
 
