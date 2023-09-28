@@ -52,6 +52,35 @@ ageForm.addEventListener('submit', (event) => {
 
 
 
+createForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  let maBod = {
+    id: 0,
+    firstName: newFirstInput.value, 
+    lastName: newLastInput.value, 
+    gender: newGenderDropDown.value,
+    age: newAgeInput.value, 
+    likes: newLikesText.value.split(',')
+}
+
+  axios.post(`${baseURL}/character`, maBod)
+  .then((response) => {
+    clearCharacters()
+    for (let i = 0; i < response.data.length; i++) {
+      createCharacterCard(response.data[i]);
+    }
+    
+  })
+  .catch ((error) => {
+
+  })
+
+
+})
+
+
+
 
 function createCharacterCard(char) {
   let charCard = document.createElement('div')
